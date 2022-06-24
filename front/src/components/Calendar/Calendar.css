@@ -1,0 +1,9 @@
+.events-calendar {
+    background-color: #121214;
+    width: 50%;
+}
+
+.marked {
+    background-color: red;
+    border-radius: 50%;
+}

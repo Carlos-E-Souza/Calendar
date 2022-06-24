@@ -1,0 +1,30 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    padding: 1.8rem;
+    border-radius: 1.2rem;
+    border: 1px solid #323238;
+    background-color: #121214;
+}
+
+.form-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #e1e1e6;
+}
+
+.input {
+    background-color: #e1e1e6;
+}
+
+.input:focus {
+    background-color: #e1e1e6;
+}
+
+.signup-link {
+    margin-top: 2rem;
+}
+
+.change-form-link:hover {
+    cursor: pointer;
+}
