@@ -1,0 +1,5 @@
+{
+    "jwtPrivateKey": "",
+    "DATABASE_URL": "mongodb://localhost:27017/calendar?replicaSet=rs",
+    "NODE_ENV": "development"
+}
