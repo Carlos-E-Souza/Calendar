@@ -1,0 +1,17 @@
+.sidebar::before {
+    content: ".";
+    background-color: #8d8d99;
+    height: 100%;
+    width: 2px;
+}
+
+.sidebar {
+    color: white;
+}
+
+.sidebar-title {
+    display: block;
+    margin-top: 1rem;
+    font-size: x-large;
+    font-weight: 600;
+}

@@ -1,5 +1,5 @@
 import { ChangeEvent, FC, useState } from "react"
-import { Button, Form } from "react-bootstrap"
+import { Input } from "../Common/Input"
 import { UserInterface } from "../Login/Login"
 
 import "./Signup.css"
@@ -32,77 +32,69 @@ export const Signup: FC<SignupProps> = ({ goToLogin }) => {
         console.log(newUser)
     }
 
+    const inputs = [
+        {
+            key: 1,
+            id: "signupName",
+            label: "Full Name",
+            type: "text",
+            name: "name",
+            placeholder: "Your Name",
+            value: newUser.name,
+            onChange: handleInputChange,
+            className: "group-form",
+        },
+        {
+            key: 2,
+            id: "signupEmail",
+            label: "Email Address",
+            type: "email",
+            name: "email",
+            placeholder: "Enter Email",
+            value: newUser.email,
+            onChange: handleInputChange,
+            className: "group-form",
+        },
+        {
+            key: 3,
+            id: "signupPassword",
+            label: "Password",
+            type: "password",
+            name: "password",
+            placeholder: "Password",
+            value: newUser.password,
+            onChange: handleInputChange,
+            className: "group-form",
+        },
+        {
+            key: 4,
+            id: "confirmPassword",
+            label: "Confirm Password",
+            type: "password",
+            name: "confirmPassword",
+            placeholder: "Password",
+            value: newUser.confirmPassword,
+            onChange: handleInputChange,
+            className: "group-form",
+        },
+    ]
+
     return (
         <div className="form-container w-50">
             <h1 className="form-title">Create an Account</h1>
             <span className="text-muted mb-3 d-block">
                 Please enter your details
             </span>
-            <Form className="d-flex flex-wrap justify-content-between">
-                <Form.Group className="mb-2 form-group" controlId="signupName">
-                    <Form.Label className="text-muted">Full Name</Form.Label>
-                    <Form.Control
-                        type="text"
-                        placeholder="Your Name"
-                        className="input"
-                        name="name"
-                        value={newUser.name}
-                        onChange={handleInputChange}
-                    />
-                </Form.Group>
+            <form className="form d-flex flex-wrap justify-content-between">
+                {inputs.map((inp) => {
+                    return <Input {...inp} />
+                })}
 
-                <Form.Group className="mb-2 form-group" controlId="signupEmail">
-                    <Form.Label className="text-muted">
-                        Email Address
-                    </Form.Label>
-                    <Form.Control
-                        type="email"
-                        placeholder="Enter email"
-                        className="input"
-                        name="email"
-                        value={newUser.email}
-                        onChange={handleInputChange}
-                    />
-                </Form.Group>
-
-                <Form.Group
-                    className="mb-3 form-group"
-                    controlId="signupPassword">
-                    <Form.Label className="text-muted">Password</Form.Label>
-                    <Form.Control
-                        type="password"
-                        placeholder="Password"
-                        className="input"
-                        name="password"
-                        value={newUser.password}
-                        onChange={handleInputChange}
-                    />
-                </Form.Group>
-
-                <Form.Group
-                    className="mb-3 form-group"
-                    controlId="confirmPassword">
-                    <Form.Label className="text-muted">
-                        Confirm Password
-                    </Form.Label>
-                    <Form.Control
-                        type="password"
-                        placeholder="Password"
-                        className="input"
-                        name="confirmPassword"
-                        value={newUser.confirmPassword}
-                        onChange={handleInputChange}
-                    />
-                </Form.Group>
-
-                <Button
-                    variant="primary"
+                <button
                     type="submit"
-                    className="w-100"
-                    onClick={(e) => handleSignupSubmit(e)}>
-                    Sign-up
-                </Button>
-            </Form>
+                    className="btn btn-primary w-100"
+                    onClick={(e) => handleSignupSubmit(e)}></button>
+            </form>
             <span className="text-muted text-center mt-3">
                 Already have an account?
                 <span

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react"
+import React, { ChangeEvent, useCallback, useState } from "react"
 import Calendar, { CalendarTileProperties } from "react-calendar"
 import { isSameDay } from "../../utils/SameDay"
 
@@ -33,7 +33,7 @@ export const Data = () => {
                 return "day marked"
             }
         }
-        return "day normal"
+        return "day"
     }
 
     const tileContent = ({ date, view }: CalendarTileProperties) => {
@@ -41,10 +41,17 @@ export const Data = () => {
         if (view === "month") {
             // Check if a date React-Calendar wants to check is on the list of dates to add class to
             if (markedDays.find((dDate) => isSameDay(dDate, date))) {
-                return <span>foi</span>
+                return <span className="day"></span>
             }
         }
         return null
+    }
+
+    const handleClickDay = (
+        value: Date,
+        e: React.MouseEvent<HTMLButtonElement>
+    ) => {
+        console.log(value, e)
     }
 
     return (
@@ -55,6 +62,7 @@ export const Data = () => {
             tileContent={tileContent}
             minDetail="decade"
             showFixedNumberOfWeeks={false}
+            onClickDay={handleClickDay}
         />
     )
 }

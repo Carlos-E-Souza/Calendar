@@ -4,7 +4,7 @@ import { Signup } from "../components/Signup/Signup"
 
 interface LoginPageProps {}
 
-const LoginPage: FC<LoginPageProps> = () => {
+export const LoginPage: FC<LoginPageProps> = () => {
     const [isLoginPage, setIsLoginPage] = useState<boolean>(true)
 
     return (
@@ -17,5 +17,3 @@ const LoginPage: FC<LoginPageProps> = () => {
         </div>
     )
 }
-
-export default LoginPage

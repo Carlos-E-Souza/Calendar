@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Route, Routes, Navigate } from "react-router-dom"
-import LoginPage from "./pages/LoginSignup"
+import { LoginPage } from "./pages/LoginSignup"
 
 import "./App.css"
 import "bootstrap/dist/css/bootstrap.min.css"

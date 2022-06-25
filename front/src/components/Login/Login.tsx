@@ -1,5 +1,6 @@
-import React, { ChangeEvent, FC, MouseEventHandler, useState } from "react"
-import { Button, Form, FormControl, FormControlProps } from "react-bootstrap"
+import React, { ChangeEvent, FC, useState } from "react"
+import { Button, Form } from "react-bootstrap"
+import { Input } from "../Common/Input"
 
 import "./Login.css"
 
@@ -26,47 +27,49 @@ export const Login: FC<LoginProps> = ({ goToSingup }) => {
         console.log(user)
     }
 
+    const inputs = [
+        {
+            key: 1,
+            id: "loginEmail",
+            label: "Email Address",
+            type: "text",
+            name: "email",
+            placeholder: "Enter Email",
+            value: user.email,
+            onChange: handleInputChange,
+        },
+        {
+            key: 2,
+            id: "loginPassword",
+            label: "Password",
+            type: "password",
+            name: "password",
+            placeholder: "Password",
+            value: user.password,
+            onChange: handleInputChange,
+        },
+    ]
+
     return (
         <div className="form-container">
             <h1 className="form-title">Welcome Back</h1>
             <span className="text-muted mb-3 d-block">
                 Please enter your details
             </span>
-            <Form>
-                <Form.Group className="mb-2" controlId="loginEmail">
-                    <Form.Label className="text-muted">
-                        Email address
-                    </Form.Label>
-                    <Form.Control
-                        type="email"
-                        placeholder="Enter email"
-                        className="input"
-                        name="email"
-                        value={user.email}
-                        onChange={handleInputChange}
-                    />
-                </Form.Group>
 
-                <Form.Group className="mb-3" controlId="loginPassword">
-                    <Form.Label className="text-muted">Password</Form.Label>
-                    <Form.Control
-                        type="password"
-                        placeholder="Password"
-                        className="input"
-                        name="password"
-                        value={user.password}
-                        onChange={handleInputChange}
-                    />
-                </Form.Group>
+            <form className="form">
+                {inputs.map((inp) => {
+                    return <Input {...inp} />
+                })}
 
-                <Button
-                    variant="primary"
+                <button
+                    className="btn btn-primary w-100 mt-2"
                     type="submit"
-                    className="w-100"
                     onClick={(e) => handleLoginSubmit(e)}>
                     Login
-                </Button>
-            </Form>
+                </button>
+            </form>
+
             <span className="text-muted text-center mt-3">
                 Don't have an account?
                 <span
