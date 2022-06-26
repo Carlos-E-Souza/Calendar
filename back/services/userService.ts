@@ -32,3 +32,7 @@ export const createUserDB = async (receivedUser: UserInterface) => {
 export const getUserDB = async (email: string) => {
     return await User.findOne({ email })
 }
+
+export const getUserById = async (id: string) => {
+    return await User.findById(id)
+}

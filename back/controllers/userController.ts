@@ -16,11 +16,7 @@ export class UserController {
         return await getUserDB(user.email)
     }
 
-    createUser = async (
-        req: Request,
-        res: Response,
-        next: NextFunction
-    ): Promise<Response> => {
+    createUser = async (req: Request, res: Response): Promise<Response> => {
         const { error } = this.validateUser(req.body)
         if (error) return res.status(400).json(error.message)
 
