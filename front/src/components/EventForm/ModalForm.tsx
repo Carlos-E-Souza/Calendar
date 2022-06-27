@@ -1,5 +1,7 @@
 import { ChangeEventHandler, FC, MouseEventHandler, useState } from "react"
 
+import "./ModalForm.css"
+
 interface ModalFormProps {
     closeModal: MouseEventHandler<HTMLButtonElement>
 }
@@ -23,15 +25,33 @@ export const ModalForm: FC<ModalFormProps> = ({ closeModal }) => {
         endTime: "",
     })
 
-    const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleFormChange = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
         const property = e.target.name
         setFormData({ ...formData, [property]: e.target.value })
     }
 
+    const handleFormSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+    }
+
+    const inputs = [
+        {
+            id: "0",
+            label: "Title",
+            type: "text",
+            name: "title",
+            placeholder: "Event Title",
+            value: formData.title,
+            onChange: handleFormChange,
+            className: "",
+        },
+    ]
     return (
         <div className="modal d-flex">
             <div className="modal-dialog">
-                <div className="modal-content">
+                <div className="modal-content text-dark">
                     <div className="modal-header">
                         <h5 className="modal-title">Add Event</h5>
                         <button
@@ -52,6 +72,8 @@ export const ModalForm: FC<ModalFormProps> = ({ closeModal }) => {
                                     className="form-control"
                                     id="event-title"
                                     name="title"
+                                    value={formData.title}
+                                    onChange={handleFormChange}
                                 />
                             </div>
                             <div className="mb-3">
@@ -63,7 +85,9 @@ export const ModalForm: FC<ModalFormProps> = ({ closeModal }) => {
                                 <textarea
                                     className="form-control"
                                     id="event-description"
-                                    name="description"></textarea>
+                                    name="description"
+                                    value={formData.description}
+                                    onChange={handleFormChange}></textarea>
                             </div>
                             <div className="mb-3">
                                 <label
@@ -103,6 +127,8 @@ export const ModalForm: FC<ModalFormProps> = ({ closeModal }) => {
                                     type="date"
                                     name="endDate"
                                     id="end-date"
+                                    value={formData.endDate}
+                                    onChange={handleFormChange}
                                 />
                             </div>
                             <div className="mb-3">
@@ -115,6 +141,8 @@ export const ModalForm: FC<ModalFormProps> = ({ closeModal }) => {
                                     type="time"
                                     name="endTime"
                                     id="end-time"
+                                    value={formData.endTime}
+                                    onChange={handleFormChange}
                                 />
                             </div>
                         </form>
@@ -123,10 +151,13 @@ export const ModalForm: FC<ModalFormProps> = ({ closeModal }) => {
                         <button
                             type="button"
                             className="btn btn-secondary"
-                            data-bs-dismiss="modal">
+                            onClick={closeModal}>
                             Close
                         </button>
-                        <button type="button" className="btn btn-primary">
+                        <button
+                            type="button"
+                            className="btn btn-primary"
+                            onClick={handleFormSubmit}>
                             Add Event
                         </button>
                     </div>

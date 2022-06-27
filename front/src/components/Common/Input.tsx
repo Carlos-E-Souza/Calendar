@@ -5,15 +5,16 @@ interface InputProps {
     label: string
     type: string
     name: string
-    placeholder: string
+    placeholder?: string
     value: string
     onChange: ChangeEventHandler<HTMLInputElement>
-    className?: string
+    labelClass?: string
+    inputClass?: string
 }
 
 export const Input: FC<InputProps> = (props) => {
     return (
-        <div className={"form-group mb-3 " + props.className}>
+        <>
             <label htmlFor={props.id} className="form-label text-muted">
                 {props.label}
             </label>
@@ -22,6 +23,6 @@ export const Input: FC<InputProps> = (props) => {
                 className="form-control input"
                 onChange={(e) => props.onChange(e)}
             />
-        </div>
+        </>
     )
 }

@@ -56,7 +56,6 @@ export const Signup: FC<SignupProps> = ({ goToLogin }) => {
             placeholder: "Your Name",
             value: newUser.name,
             onChange: handleInputChange,
-            className: "group-form",
         },
         {
             key: 2,
@@ -67,7 +66,6 @@ export const Signup: FC<SignupProps> = ({ goToLogin }) => {
             placeholder: "Enter Email",
             value: newUser.email,
             onChange: handleInputChange,
-            className: "group-form",
         },
         {
             key: 3,
@@ -78,7 +76,6 @@ export const Signup: FC<SignupProps> = ({ goToLogin }) => {
             placeholder: "Password",
             value: newUser.password,
             onChange: handleInputChange,
-            className: "group-form",
         },
         {
             key: 4,
@@ -89,7 +86,6 @@ export const Signup: FC<SignupProps> = ({ goToLogin }) => {
             placeholder: "Password",
             value: newUser.confirmPassword,
             onChange: handleInputChange,
-            className: "group-form",
         },
     ]
 
@@ -104,7 +100,13 @@ export const Signup: FC<SignupProps> = ({ goToLogin }) => {
             </span>
             <form className="form d-flex flex-wrap justify-content-between">
                 {inputs.map((inp) => {
-                    return <Input {...inp} />
+                    return (
+                        <div
+                            key={inp.id}
+                            className="group-form form-group mb-3">
+                            <Input {...inp} />
+                        </div>
+                    )
                 })}
 
                 <button
