@@ -1,4 +1,6 @@
 import { ChangeEvent, FC, useState } from "react"
+import { registerUser } from "../../services/registerUser"
+import { AlertError } from "../Common/ErrorAlert"
 import { Input } from "../Common/Input"
 import { UserInterface } from "../Login/Login"
 
@@ -21,15 +23,27 @@ export const Signup: FC<SignupProps> = ({ goToLogin }) => {
         confirmPassword: "",
     })
 
+    const [isAlertVisible, setIsAlertVisible] = useState(false)
+
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         const property = e.target.name
         setNewUser({ ...newUser, [property]: e.target.value })
     }
 
-    const handleSignupSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
+    const handleSignupSubmit = async (
+        e: React.FormEvent<HTMLButtonElement>
+    ) => {
         e.preventDefault()
 
-        console.log(newUser)
+        const { name, email, password, confirmPassword } = newUser
+
+        if (password !== confirmPassword) return setIsAlertVisible(true)
+
+        const registered = await registerUser({
+            name,
+            email,
+            password,
+        })
     }
 
     const inputs = [
@@ -81,6 +95,9 @@ export const Signup: FC<SignupProps> = ({ goToLogin }) => {
 
     return (
         <div className="form-container w-50">
+            {isAlertVisible && (
+                <AlertError onClick={() => setIsAlertVisible(false)} />
+            )}
             <h1 className="form-title">Create an Account</h1>
             <span className="text-muted mb-3 d-block">
                 Please enter your details
@@ -93,7 +110,9 @@ export const Signup: FC<SignupProps> = ({ goToLogin }) => {
                 <button
                     type="submit"
                     className="btn btn-primary w-100"
-                    onClick={(e) => handleSignupSubmit(e)}></button>
+                    onClick={(e) => handleSignupSubmit(e)}>
+                    Sign-Up
+                </button>
             </form>
             <span className="text-muted text-center mt-3">
                 Already have an account?

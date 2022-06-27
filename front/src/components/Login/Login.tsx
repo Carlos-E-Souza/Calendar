@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FC, useState } from "react"
-import { Button, Form } from "react-bootstrap"
+import { useNavigate } from "react-router-dom"
+import { authUser } from "../../services/authUser"
 import { Input } from "../Common/Input"
 
 import "./Login.css"
@@ -13,18 +14,22 @@ export interface UserInterface {
     password: string
 }
 
-export const Login: FC<LoginProps> = ({ goToSingup }) => {
+export const Login: FC<LoginProps> = (props) => {
     const [user, setUser] = useState<UserInterface>({ email: "", password: "" })
+    const navigate = useNavigate()
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         const property = e.target.name
         setUser({ ...user, [property]: e.target.value })
     }
 
-    const handleLoginSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
+    const handleLoginSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault()
 
-        console.log(user)
+        const userToken = await authUser(user)
+        localStorage.setItem("token", userToken)
+
+        navigate("/calendar")
     }
 
     const inputs = [
@@ -74,7 +79,7 @@ export const Login: FC<LoginProps> = ({ goToSingup }) => {
                 Don't have an account?
                 <span
                     className="text-primary text-decoration-none change-form-link"
-                    onClick={() => goToSingup()}>
+                    onClick={() => props.goToSingup()}>
                     Sign-up
                 </span>
             </span>

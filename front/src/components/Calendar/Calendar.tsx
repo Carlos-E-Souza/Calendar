@@ -1,29 +1,17 @@
-import React, { ChangeEvent, useCallback, useState } from "react"
+import React, { FC, MouseEventHandler, useState } from "react"
 import Calendar, { CalendarTileProperties } from "react-calendar"
 import { isSameDay } from "../../utils/SameDay"
+import { ModalForm } from "../EventForm/ModalForm"
 
 import "./Calendar.css"
-//import "react-calendar/dist/Calendar.css"
 
-interface titleProps {
-    date: string
-    view: string
+interface CalendarProps {
+    onClick: (value: Date, e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
-export const Data = () => {
+export const Data: FC<CalendarProps> = ({ onClick }) => {
     const [value, setValue] = useState(new Date())
     const [markedDays, setMarkedDays] = useState([new Date()])
-
-    /* const tileClassName = useCallback(() => {return ({ date, view }:CalendarTileProperties) => {
-        // Add class to tiles in month view only
-        if (view === 'month') {
-            // Check if a date React-Calendar wants to check is on the list of dates to add class to
-            if (markedDays?.find(dDate => isSameDay(dDate, date))) {
-                return 'day marked';
-            }
-        }
-        return "day normal"
-    }}, [markedDays]) */
 
     const tileClassName = ({ date, view }: CalendarTileProperties) => {
         // Add class to tiles in month view only
@@ -41,7 +29,7 @@ export const Data = () => {
         if (view === "month") {
             // Check if a date React-Calendar wants to check is on the list of dates to add class to
             if (markedDays.find((dDate) => isSameDay(dDate, date))) {
-                return <span className="day"></span>
+                return null
             }
         }
         return null
@@ -50,9 +38,7 @@ export const Data = () => {
     const handleClickDay = (
         value: Date,
         e: React.MouseEvent<HTMLButtonElement>
-    ) => {
-        console.log(value, e)
-    }
+    ) => {}
 
     return (
         <Calendar
@@ -62,7 +48,6 @@ export const Data = () => {
             tileContent={tileContent}
             minDetail="decade"
             showFixedNumberOfWeeks={false}
-            onClickDay={handleClickDay}
         />
     )
 }

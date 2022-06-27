@@ -6,13 +6,15 @@ export interface EventInterface {
     userId: string
     title: string
     description: string
-    initDate: String
-    endDate: String
+    initDate: string
+    initTime: string
+    endDate: string
+    endTime: string
 }
 
 export class EventService {
     getUserEventsDB = async (userId: string) => {
-        return await Event.find({ userId })
+        return await Event.find({ userId }).sort("initDate initTime")
     }
 
     getEventDB = async (id: string) => {
@@ -40,15 +42,10 @@ export class EventService {
         return newEvent
     }
 
-    updateEventDB = async (
-        id: string,
-        { userId, title, description, initDate, endDate }: EventInterface
-    ) => {
-        const eventUpdated = await Event.findByIdAndUpdate(
-            id,
-            { userId, title, description, initDate, endDate },
-            { new: true }
-        )
+    updateEventDB = async (id: string, newData: EventInterface) => {
+        const eventUpdated = await Event.findByIdAndUpdate(id, newData, {
+            new: true,
+        })
             .then((res) => {
                 return res
             })

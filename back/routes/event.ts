@@ -5,7 +5,7 @@ export const eventRoute = Router()
 
 const eventController = new EventController()
 
-eventRoute.get("/:userId", eventController.getUserEvents)
+eventRoute.get("/user/:userId", eventController.getUserEvents)
 
 eventRoute.get("/:id", eventController.getEvent)
 

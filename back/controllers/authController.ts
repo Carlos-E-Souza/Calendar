@@ -1,7 +1,6 @@
 import { compare } from "bcrypt"
 import { Request, Response, NextFunction } from "express"
 import Joi from "joi"
-import { User } from "../models/userModel"
 import { getUserDB } from "../services/userService"
 
 interface userAuthInterface {
@@ -44,7 +43,7 @@ export class AuthController {
         return await this.checkUserInfo(req.body)
             .then((user) => {
                 const userToken = user.generateAuthToken()
-                return res.json(user).header("x-auth-token", userToken)
+                return res.json(userToken)
             })
             .catch((err) => {
                 return res.status(404).json(err.message)
