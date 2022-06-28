@@ -1,12 +1,14 @@
 import { ChangeEventHandler, FC } from "react"
 
+import "./Input.css"
+
 interface InputProps {
-    id: string
-    label: string
-    type: string
-    name: string
+    id?: string
+    label?: string
+    type?: string
+    name?: string
     placeholder?: string
-    value: string
+    value?: string
     onChange: ChangeEventHandler<HTMLInputElement>
     labelClass?: string
     inputClass?: string
@@ -15,12 +17,16 @@ interface InputProps {
 export const Input: FC<InputProps> = (props) => {
     return (
         <>
-            <label htmlFor={props.id} className="form-label text-muted">
+            <label
+                htmlFor={props.id}
+                className={
+                    (props.labelClass && props.labelClass) || "mb-1 text-muted"
+                }>
                 {props.label}
             </label>
             <input
                 {...props}
-                className="form-control input"
+                className={(props.inputClass && props.inputClass) || "input"}
                 onChange={(e) => props.onChange(e)}
             />
         </>

@@ -90,20 +90,16 @@ export const Signup: FC<SignupProps> = ({ goToLogin }) => {
     ]
 
     return (
-        <div className="form-container w-50">
+        <div className="form-container">
             {isAlertVisible && (
                 <AlertError onClick={() => setIsAlertVisible(false)} />
             )}
             <h1 className="form-title">Create an Account</h1>
-            <span className="text-muted mb-3 d-block">
-                Please enter your details
-            </span>
-            <form className="form d-flex flex-wrap justify-content-between">
+            <span className="form-desc">Please enter your details</span>
+            <form className="signup-form">
                 {inputs.map((inp) => {
                     return (
-                        <div
-                            key={inp.id}
-                            className="group-form form-group mb-3">
+                        <div key={inp.id} className="w-5/12 mb-4">
                             <Input {...inp} />
                         </div>
                     )
@@ -111,7 +107,7 @@ export const Signup: FC<SignupProps> = ({ goToLogin }) => {
 
                 <button
                     type="submit"
-                    className="btn btn-primary w-100"
+                    className="submit-btn"
                     onClick={(e) => handleSignupSubmit(e)}>
                     Sign-Up
                 </button>
@@ -119,7 +115,7 @@ export const Signup: FC<SignupProps> = ({ goToLogin }) => {
             <span className="text-muted text-center mt-3">
                 Already have an account?
                 <span
-                    className="text-primary text-decoration-none change-form-link"
+                    className="text-blue-700 hover:cursor-pointer"
                     onClick={() => goToLogin()}>
                     Login
                 </span>

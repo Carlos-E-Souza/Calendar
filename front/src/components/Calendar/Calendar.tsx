@@ -1,15 +1,12 @@
 import React, { FC, MouseEventHandler, useState } from "react"
 import Calendar, { CalendarTileProperties } from "react-calendar"
 import { isSameDay } from "../../utils/SameDay"
-import { ModalForm } from "../EventForm/ModalForm"
 
 import "./Calendar.css"
 
-interface CalendarProps {
-    onClick: (value: Date, e: React.MouseEvent<HTMLButtonElement>) => void
-}
+interface CalendarProps {}
 
-export const Data: FC<CalendarProps> = ({ onClick }) => {
+export const Data: FC<CalendarProps> = () => {
     const [value, setValue] = useState(new Date())
     const [markedDays, setMarkedDays] = useState([new Date()])
 
@@ -34,11 +31,6 @@ export const Data: FC<CalendarProps> = ({ onClick }) => {
         }
         return null
     }
-
-    const handleClickDay = (
-        value: Date,
-        e: React.MouseEvent<HTMLButtonElement>
-    ) => {}
 
     return (
         <Calendar

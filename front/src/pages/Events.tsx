@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
 import { Data } from "../components/Calendar/Calendar"
 import { Sidebar } from "../components/Sidebar/Sidebar"
 import { EventService } from "../services/eventServices"
 import jwtDecode from "jwt-decode"
 
-import "./Events.css"
-import { ModalForm } from "../components/EventForm/ModalForm"
+import "./Pages.css"
 
 const eventService = new EventService()
 
@@ -22,11 +21,27 @@ interface User {
     _id: string
     email: string
 }
+const some = {
+    user: { _id: "", email: "" },
+}
+
+export type UserId = {
+    copy: string
+    setCopy: (c: string) => void
+}
+
+export const UserId = createContext<UserId>({
+    copy: "",
+    setCopy: () => {},
+})
+
+export const useUserId = () => useContext(UserId)
 
 export const Events = () => {
     const [events, setEvents] = useState<Event[]>()
-    const [user, setUser] = useState<User>()
+    const [user, setUser] = useState<User>({ _id: "", email: "" })
     const [isModalVisible, setIsModalVisible] = useState(false)
+    const [copy, setCopy] = useState<string>("")
 
     useEffect(() => {
         const fun = async () => {
@@ -35,19 +50,20 @@ export const Events = () => {
             setUser(user)
             const events = await eventService.getUserEvents(user?._id)
             setEvents(events)
+            setCopy(user._id)
         }
         fun()
     }, [])
 
     return (
-        <div className="d-flex justify-content-center align-items-center vh-100 vw-100">
-            {/* {isModalVisible ? (
-                <ModalForm closeModal={() => setIsModalVisible(false)} />
-            ) : null} */}
-            <div className="d-flex w-75 h-75 justify-content-start align-items-center event-container">
-                <Data onClick={() => setIsModalVisible(true)} />
-                <Sidebar events={events} />
+        <UserId.Provider value={{ copy, setCopy }}>
+            <div className="page-container">
+                <div className="event-container">
+                    <Data />
+
+                    <Sidebar events={events} user={user} />
+                </div>
             </div>
-        </div>
+        </UserId.Provider>
     )
 }

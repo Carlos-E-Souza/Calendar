@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom"
 import { authUser } from "../../services/authUser"
 import { Input } from "../Common/Input"
 
-import "./Login.css"
-
 interface LoginProps {
     goToSingup: Function
 }
@@ -56,19 +54,23 @@ export const Login: FC<LoginProps> = (props) => {
     ]
 
     return (
-        <div className="form-container">
+        <div className="form-container w-1/3">
             <h1 className="form-title">Welcome Back</h1>
-            <span className="text-muted mb-3 d-block">
+            <span className="text-muted mb-3 block">
                 Please enter your details
             </span>
 
             <form className="form">
                 {inputs.map((inp) => {
-                    return <Input {...inp} />
+                    return (
+                        <div className="mb-3">
+                            <Input {...inp} />
+                        </div>
+                    )
                 })}
 
                 <button
-                    className="btn btn-primary w-100 mt-2"
+                    className="submit-btn"
                     type="submit"
                     onClick={(e) => handleLoginSubmit(e)}>
                     Login
@@ -78,7 +80,7 @@ export const Login: FC<LoginProps> = (props) => {
             <span className="text-muted text-center mt-3">
                 Don't have an account?
                 <span
-                    className="text-primary text-decoration-none change-form-link"
+                    className="text-blue-700 hover:cursor-pointer"
                     onClick={() => props.goToSingup()}>
                     Sign-up
                 </span>

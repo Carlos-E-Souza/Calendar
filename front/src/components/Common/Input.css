@@ -1,0 +1,7 @@
+.input {
+    @apply block w-full mr-0 py-1.5 px-3 font-normal text-base text-surface-prim
+        bg-gray5 bg-clip-padding border-2 border-[#ced4da] appearance-none rounded
+        transition-colors focus:outline-none ease-in-out duration-100 focus:border-blue-700 focus:border-2;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}

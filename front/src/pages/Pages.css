@@ -1,0 +1,7 @@
+.page-container {
+    @apply flex justify-center items-center w-screen h-screen;
+}
+
+.event-container {
+    @apply flex w-3/4 h-3/4 justify-center items-center bg-surface-sec border-2 border-muted rounded-2xl;
+}
