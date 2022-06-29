@@ -15,6 +15,7 @@ interface InputProps {
 }
 
 export const Input: FC<InputProps> = (props) => {
+    const today = new Date()
     return (
         <>
             <label
@@ -26,6 +27,9 @@ export const Input: FC<InputProps> = (props) => {
             </label>
             <input
                 {...props}
+                min={`${today.getFullYear()}-0${
+                    today.getMonth() + 1
+                }-${today.getDate()}`}
                 className={(props.inputClass && props.inputClass) || "input"}
                 onChange={(e) => props.onChange(e)}
             />

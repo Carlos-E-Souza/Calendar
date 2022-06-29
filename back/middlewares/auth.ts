@@ -1,13 +1,17 @@
 import { Request, Response, NextFunction } from "express"
 import { JwtPayload, verify } from "jsonwebtoken"
-import { get } from "config"
+import config from "config"
 
-interface newReqInterface extends Request {
-    user: JwtPayload | string
+declare global {
+    namespace Express {
+        interface Request {
+            user: JwtPayload | string | any
+        }
+    }
 }
 
 export const authMiddleware = (
-    req: newReqInterface,
+    req: Request,
     res: Response,
     next: NextFunction
 ) => {
@@ -15,7 +19,7 @@ export const authMiddleware = (
     if (!token) return res.status(401).json("Acess denied. No token provided.")
 
     try {
-        const decodeData = verify(token, get("jwtPrivateKey"))
+        const decodeData = verify(token, config.get("jwtPrivateKey"))
         req.user = decodeData
         next()
     } catch (err) {

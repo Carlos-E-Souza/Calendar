@@ -4,8 +4,12 @@
     justify-content: flex-start;
     align-items: flex-start;
     color: white;
-    width: 65%;
+    width: 60%;
     height: 100%;
+}
+
+.react-calendar {
+    @apply p-4;
 }
 
 .react-calendar__month-view__weekdays {
@@ -15,8 +19,6 @@
 }
 
 .react-calendar__navigation {
-    margin-top: 1rem;
-    margin-left: 1rem;
     background-color: transparent;
     color: white;
     display: flex;
@@ -24,6 +26,9 @@
     justify-items: flex-start;
     align-items: center;
     width: 50%;
+    margin-bottom: 1rem;
+    line-height: 2rem;
+    font-size: 1.1rem;
 }
 
 .react-calendar__navigation__label {
@@ -64,7 +69,6 @@
 
 .react-calendar__month-view__days {
     height: 100%;
-    padding: 1rem;
 }
 
 .marked {

@@ -1,20 +1,14 @@
-import {
-    ChangeEventHandler,
-    FC,
-    MouseEventHandler,
-    useContext,
-    useState,
-} from "react"
-import { useUserId } from "../../pages/Events"
+import { FC, MouseEventHandler, useState } from "react"
+import { EventService } from "../../services/eventServices"
 import { Input } from "../Common/Input"
 
 import "./ModalForm.css"
 
-interface ModalFormProps {
+interface CreateEventProps {
     closeModal: MouseEventHandler<HTMLButtonElement>
 }
 
-interface FormData {
+export interface FormData {
     title: string
     description: string
     initDate: string
@@ -23,7 +17,9 @@ interface FormData {
     endTime: string
 }
 
-export const ModalForm: FC<ModalFormProps> = ({ closeModal }) => {
+const eventService = new EventService()
+
+export const CreateEventModal: FC<CreateEventProps> = ({ closeModal }) => {
     const [formData, setFormData] = useState<FormData>({
         title: "",
         description: "",
@@ -40,10 +36,11 @@ export const ModalForm: FC<ModalFormProps> = ({ closeModal }) => {
         setFormData({ ...formData, [property]: e.target.value })
     }
 
-    const handleFormSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
+    const handleFormSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        const user = useUserId().copy
-        console.log(user)
+        const token = localStorage.getItem("token") || ""
+        const event = await eventService.sendEvent(token, formData)
+        window.location.reload()
     }
 
     const inputs = [
@@ -94,6 +91,7 @@ export const ModalForm: FC<ModalFormProps> = ({ closeModal }) => {
             onChange: handleFormChange,
         },
     ]
+
     return (
         <div className="modal d-flex">
             <div className="modal-dialog">
@@ -110,7 +108,7 @@ export const ModalForm: FC<ModalFormProps> = ({ closeModal }) => {
                             {inputs.map((input) => {
                                 if (input.label === "Description")
                                     return (
-                                        <div>
+                                        <div key={input.id}>
                                             <label
                                                 htmlFor="event-description"
                                                 className="col-form-label">

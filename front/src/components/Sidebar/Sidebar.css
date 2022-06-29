@@ -1,9 +1,9 @@
 .sidebar {
-    @apply flex flex-col h-full text-white p-4 w-4/12 border-l-2 border-muted;
+    @apply flex flex-col h-full text-white p-4 w-2/5 border-l-2 border-muted;
 }
 
 .sidebar-header {
-    @apply flex justify-between items-center m-0 mb-1;
+    @apply flex justify-between items-center m-0 mb-4;
 }
 
 .sidebar-title {
@@ -11,8 +11,13 @@
 }
 
 .sidebar-card {
-    @apply bg-surface-prim flex flex-col justify-center items-start 
+    @apply w-11/12 bg-surface-prim flex flex-col justify-center items-start 
         border-2 border-muted rounded-lg p-2 my-1.5;
+}
+
+.card-title {
+    @apply whitespace-nowrap overflow-hidden resize-x w-full text-left 
+        text-base m-0 font-medium text-white;
 }
 
 .add-task-btn {

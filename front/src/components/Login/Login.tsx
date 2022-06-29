@@ -63,7 +63,7 @@ export const Login: FC<LoginProps> = (props) => {
             <form className="form">
                 {inputs.map((inp) => {
                     return (
-                        <div className="mb-3">
+                        <div className="mb-3" key={inp.id}>
                             <Input {...inp} />
                         </div>
                     )

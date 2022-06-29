@@ -1,11 +1,14 @@
 import { Router } from "express"
 import { EventController } from "../controllers/eventController"
+import { authMiddleware } from "../middlewares/auth"
 
 export const eventRoute = Router()
 
 const eventController = new EventController()
 
-eventRoute.get("/user/:userId", eventController.getUserEvents)
+eventRoute.use(authMiddleware)
+
+eventRoute.get("/user", eventController.getUserEvents)
 
 eventRoute.get("/:id", eventController.getEvent)
 

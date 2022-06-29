@@ -5,7 +5,7 @@ const eventService = new EventService()
 
 export class EventController {
     getUserEvents = async (req: Request, res: Response): Promise<Response> => {
-        const userEvents = await eventService.getUserEventsDB(req.params.userId)
+        const userEvents = await eventService.getUserEventsDB(req.user._id)
         return res.json(userEvents)
     }
 
