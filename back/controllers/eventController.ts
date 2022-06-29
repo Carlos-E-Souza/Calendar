@@ -16,7 +16,7 @@ export class EventController {
 
     createEvent = async (req: Request, res: Response): Promise<Response> => {
         return await eventService
-            .createEventDB(req.body)
+            .createEventDB(req.user._id, req.body)
             .then((createdEvent) => {
                 return res.json(createdEvent)
             })

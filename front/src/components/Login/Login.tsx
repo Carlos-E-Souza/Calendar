@@ -56,11 +56,11 @@ export const Login: FC<LoginProps> = (props) => {
     return (
         <div className="form-container w-1/3">
             <h1 className="form-title">Welcome Back</h1>
-            <span className="text-muted mb-3 block">
+            <span className="text-gray6 mb-3 block">
                 Please enter your details
             </span>
 
-            <form className="form">
+            <form>
                 {inputs.map((inp) => {
                     return (
                         <div className="mb-3" key={inp.id}>
@@ -77,7 +77,7 @@ export const Login: FC<LoginProps> = (props) => {
                 </button>
             </form>
 
-            <span className="text-muted text-center mt-3">
+            <span className="text-gray6 text-center mt-3">
                 Don't have an account?
                 <span
                     className="text-blue-700 hover:cursor-pointer"

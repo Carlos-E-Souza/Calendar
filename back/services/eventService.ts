@@ -3,7 +3,6 @@ import { Event } from "../models/eventModel"
 import { getUserById } from "./userService"
 
 export interface EventInterface {
-    userId: string
     title: string
     description: string
     initDate: string
@@ -21,14 +20,12 @@ export class EventService {
         return await Event.findById(id)
     }
 
-    createEventDB = async (eventData: EventInterface) => {
-        if (!isObjectIdOrHexString(eventData.userId))
-            throw new Error("Invalid userId")
+    createEventDB = async (userId: string, eventData: EventInterface) => {
+        if (!isObjectIdOrHexString(userId)) throw new Error("Invalid userId")
 
-        if (!(await getUserById(eventData.userId)))
-            throw new Error("User Not Found")
+        if (!(await getUserById(userId))) throw new Error("User Not Found")
 
-        const event = new Event({ ...eventData })
+        const event = new Event({ ...eventData, userId })
 
         const newEvent = await event
             .save()

@@ -86,7 +86,7 @@ export const UpdateEventModal: FC<UpdateEventProps> = ({
             <div className="modal-dialog">
                 <div className="modal-content text-dark">
                     <div className="modal-header">
-                        <h5 className="modal-title">Add Event</h5>
+                        <h5 className="modal-title">Edit Event</h5>
                         <button
                             type="button"
                             className="btn-close"

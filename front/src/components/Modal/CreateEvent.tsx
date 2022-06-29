@@ -93,9 +93,9 @@ export const CreateEventModal: FC<CreateEventProps> = ({ closeModal }) => {
     ]
 
     return (
-        <div className="modal d-flex">
+        <div className="modal flex">
             <div className="modal-dialog">
-                <div className="modal-content text-dark">
+                <div className="modal-content text-black">
                     <div className="modal-header">
                         <h5 className="modal-title">Add Event</h5>
                         <button

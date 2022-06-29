@@ -25,7 +25,7 @@ export const Events = () => {
         const fun = async () => {
             const token = localStorage.getItem("token") || ""
             const events = await eventService.getUserEvents(token)
-            setEvents(events)
+            setEvents(events.data)
         }
         fun()
     }, [])

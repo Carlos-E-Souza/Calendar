@@ -7,7 +7,7 @@ export class EventService {
         const res = await api.get(`/event/user`, {
             headers: { "x-auth-token": token },
         })
-        return res.data
+        return res
     }
 
     sendEvent = async (token: string, eventData: FormData) => {
@@ -15,7 +15,7 @@ export class EventService {
             headers: { "x-auth-token": token },
             data: eventData,
         })
-        return res.data
+        return res
     }
 
     updateEvent = async (token: string, eventData: Event) => {
@@ -23,6 +23,14 @@ export class EventService {
             headers: { "x-auth-token": token },
             data: eventData,
         })
-        return res.data
+        return res
+    }
+
+    deleteEvent = async (token: string, eventId: string) => {
+        const res = await api.delete(`/event/delete/${eventId}`, {
+            headers: { "x-auth-token": token },
+        })
+
+        return res
     }
 }
