@@ -39,7 +39,7 @@
 
 ## About The Project
 
-<p align="right">Basically i have built everything from back-end to front-end. Back-end is an API that uses express and mongoDB. Front-end is just React and some libraries. The app itself is a sign-up and login page then after login you have a calendar that the user can create, edit and delete events from calendar.</p>
+<p align="justify">Basically i have built everything from back-end to front-end. Back-end is an API that uses express and mongoDB. Front-end is just React and some libraries. The app itself is a sign-up and login page then after login you have a calendar that the user can create, edit and delete events from calendar.</p>
 
 ### Built With
 
