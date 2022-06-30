@@ -1,5 +1,4 @@
-const winston = require("winston")
-const config = require("config")
+import winston from "winston"
 const { combine, colorize, printf } = winston.format
 
 const customFormat = combine(
@@ -9,8 +8,7 @@ const customFormat = combine(
     })
 )
 
-const logConsole =
-    config.get("NODE_ENV") === "development" ? winston.transports.Console : null
+const logConsole = winston.transports.Console
 
 export const logging = () => {
     const logger = winston.createLogger({
