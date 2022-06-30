@@ -1,3 +1,4 @@
+import { X } from "phosphor-react"
 import { FC, MouseEventHandler, useState } from "react"
 import { Event } from "../../pages/Events"
 import { EventService } from "../../services/eventServices"
@@ -6,7 +7,7 @@ import { Input } from "../Common/Input"
 import "./ModalForm.css"
 
 interface UpdateEventProps {
-    closeModal: MouseEventHandler<HTMLButtonElement>
+    closeModal: MouseEventHandler<SVGSVGElement | HTMLButtonElement>
     event: Event
 }
 
@@ -82,29 +83,24 @@ export const UpdateEventModal: FC<UpdateEventProps> = ({
     ]
 
     return (
-        <div className="modal d-flex">
-            <div className="modal-dialog">
-                <div className="modal-content text-dark">
+        <div className="modal">
+            <div className="modal-container">
+                <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">Edit Event</h5>
-                        <button
-                            type="button"
-                            className="btn-close"
-                            onClick={closeModal}></button>
+                        <X className="close-icon" onClick={closeModal} />
                     </div>
                     <div className="modal-body">
                         <form>
                             {inputs.map((input) => {
                                 if (input.label === "Description")
                                     return (
-                                        <div key={input.id}>
-                                            <label
-                                                htmlFor="event-description"
-                                                className="col-form-label">
+                                        <div key={input.id} className="mb-3">
+                                            <label htmlFor="event-description">
                                                 Description:
                                             </label>
                                             <textarea
-                                                className="form-control"
+                                                className="input bg-gray5"
                                                 id="event-description"
                                                 name="description"
                                                 value={formEvent.description}
@@ -115,7 +111,7 @@ export const UpdateEventModal: FC<UpdateEventProps> = ({
                                     )
 
                                 return (
-                                    <div key={input.id} className="mb-2">
+                                    <div key={input.id} className="mb-3">
                                         <Input {...input} />
                                     </div>
                                 )
@@ -125,13 +121,7 @@ export const UpdateEventModal: FC<UpdateEventProps> = ({
                     <div className="modal-footer">
                         <button
                             type="button"
-                            className="btn btn-secondary"
-                            onClick={closeModal}>
-                            Close
-                        </button>
-                        <button
-                            type="button"
-                            className="btn btn-primary"
+                            className="submit-btn w-1/3 text-black"
                             onClick={handleFormSubmit}>
                             Add Event
                         </button>

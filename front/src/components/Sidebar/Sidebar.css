@@ -12,7 +12,7 @@
 
 .sidebar-card {
     @apply w-11/12 bg-surface-prim flex flex-col justify-center items-start 
-        border-2 border-muted rounded-lg p-2 my-1.5;
+        border-2 border-muted rounded-lg p-2 my-1.5 hover:cursor-pointer;
 }
 
 .card-title {
@@ -22,4 +22,8 @@
 
 .add-task-btn {
     @apply text-white text-2xl font-bold hover:font-extrabold hover:cursor-pointer;
+}
+
+.icon {
+    @apply w-5 h-5 font-bold text-white hover:text-gray4 flex self-end;
 }

@@ -1,10 +1,8 @@
-import { useState } from "react"
-import { Route, Routes, Navigate } from "react-router-dom"
+import { Route, Routes } from "react-router-dom"
 import { LoginPage } from "./pages/LoginSignup"
+import { Events } from "./pages/Events"
 
 import "./App.css"
-//import "bootstrap/dist/css/bootstrap.min.css"
-import { Events } from "./pages/Events"
 
 function App() {
     return (

@@ -1,11 +1,5 @@
 .events-calendar {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    color: white;
-    width: 60%;
-    height: 100%;
+    @apply flex flex-col justify-start items-start text-white w-3/5 h-full;
 }
 
 .react-calendar {
@@ -13,46 +7,23 @@
 }
 
 .react-calendar__month-view__weekdays {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @apply flex justify-center items-center;
 }
 
 .react-calendar__navigation {
-    background-color: transparent;
-    color: white;
-    display: flex;
-    justify-content: space-evenly;
-    justify-items: flex-start;
-    align-items: center;
-    width: 50%;
-    margin-bottom: 1rem;
-    line-height: 2rem;
-    font-size: 1.1rem;
+    @apply bg-transparent text-white flex justify-evenly items-center w-full mb-4 text-xl;
 }
 
 .react-calendar__navigation__label {
-    background-color: transparent;
-    border: none;
-    color: white;
-    font-weight: 700;
-    font-size: larger;
-    flex-grow: 0 !important;
+    @apply bg-transparent border-none text-white font-bold text-xl !flex-grow-0;
 }
 
 .react-calendar__navigation__arrow {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: transparent;
-    color: white;
-    font-weight: 600;
-    font-size: larger;
-    border: none;
+    @apply flex justify-center items-center bg-transparent text-white font-semibold text-xl border-none;
 }
 
 .react-calendar__month-view__weekdays {
-    display: none !important;
+    @apply !hidden;
 }
 
 .react-calendar__viewContainer {
@@ -71,20 +42,12 @@
     height: 100%;
 }
 
-.marked {
-    background-color: red;
-    border-radius: 50%;
+.day-marked {
+    @apply flex justify-center items-center w-8 bg-surface-prim 
+        border-2 border-blue-700 rounded-2xl p-1 text-white m-1 hover:cursor-default;
 }
 
 .day {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 2rem;
-    background-color: #121214;
-    border: 0.2rem solid #8d8d99;
-    border-radius: 1rem;
-    padding: 0.1rem;
-    color: #e1e1e6;
-    margin: 0.3rem;
+    @apply flex justify-center items-center w-8 bg-surface-prim 
+        border-2 border-gray6 rounded-2xl p-1 text-white m-1 hover:cursor-default;
 }

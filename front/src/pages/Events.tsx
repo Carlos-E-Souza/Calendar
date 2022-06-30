@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Data } from "../components/Calendar/Calendar"
+import { ViewCalendar } from "../components/Calendar/Calendar"
 import { Sidebar } from "../components/Sidebar/Sidebar"
 import { EventService } from "../services/eventServices"
 
@@ -33,7 +33,7 @@ export const Events = () => {
     return (
         <div className="page-container">
             <div className="event-container">
-                <Data />
+                <ViewCalendar events={events} />
 
                 <Sidebar events={events} />
             </div>

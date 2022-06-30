@@ -1,5 +1,14 @@
 import { NextFunction, Request, Response } from "express"
+import { JwtPayload } from "jsonwebtoken"
 import { EventService } from "../services/eventService"
+
+declare global {
+    namespace Express {
+        interface Request {
+            user: JwtPayload | string | any
+        }
+    }
+}
 
 const eventService = new EventService()
 

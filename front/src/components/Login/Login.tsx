@@ -40,6 +40,7 @@ export const Login: FC<LoginProps> = (props) => {
             placeholder: "Enter Email",
             value: user.email,
             onChange: handleInputChange,
+            label_class: "text-gray6",
         },
         {
             key: 2,
@@ -50,6 +51,7 @@ export const Login: FC<LoginProps> = (props) => {
             placeholder: "Password",
             value: user.password,
             onChange: handleInputChange,
+            label_class: "text-gray6",
         },
     ]
 

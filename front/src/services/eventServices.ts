@@ -11,17 +11,15 @@ export class EventService {
     }
 
     sendEvent = async (token: string, eventData: FormData) => {
-        const res = await api.post("/event/create", {
+        const res = await api.post("/event/create", eventData, {
             headers: { "x-auth-token": token },
-            data: eventData,
         })
         return res
     }
 
     updateEvent = async (token: string, eventData: Event) => {
-        const res = await api.put(`/event/update/${eventData._id}`, {
+        const res = await api.put(`/event/update/${eventData._id}`, eventData, {
             headers: { "x-auth-token": token },
-            data: eventData,
         })
         return res
     }

@@ -10,19 +10,15 @@ interface InputProps {
     placeholder?: string
     value?: string
     onChange: ChangeEventHandler<HTMLInputElement>
-    labelClass?: string
-    inputClass?: string
+    label_class?: string
+    input_class?: string
 }
 
 export const Input: FC<InputProps> = (props) => {
     const today = new Date()
     return (
         <>
-            <label
-                htmlFor={props.id}
-                className={
-                    (props.labelClass && props.labelClass) || "mb-1 text-muted"
-                }>
+            <label htmlFor={props.id} className={`mb-1 ${props.label_class}`}>
                 {props.label}
             </label>
             <input
@@ -30,7 +26,7 @@ export const Input: FC<InputProps> = (props) => {
                 min={`${today.getFullYear()}-0${
                     today.getMonth() + 1
                 }-${today.getDate()}`}
-                className={(props.inputClass && props.inputClass) || "input"}
+                className={`input ${props.input_class}`}
                 onChange={(e) => props.onChange(e)}
             />
         </>

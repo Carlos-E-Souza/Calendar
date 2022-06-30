@@ -1,35 +1,30 @@
-import React, { FC, MouseEventHandler, useState } from "react"
+import { FC, useState } from "react"
 import Calendar, { CalendarTileProperties } from "react-calendar"
 import { isSameDay } from "../../utils/SameDay"
+import { Event } from "../../pages/Events"
 
 import "./Calendar.css"
 
-interface CalendarProps {}
+interface CalendarProps {
+    events: Event[] | undefined
+}
 
-export const Data: FC<CalendarProps> = () => {
+export const ViewCalendar: FC<CalendarProps> = ({ events }) => {
     const [value, setValue] = useState(new Date())
-    const [markedDays, setMarkedDays] = useState([new Date()])
 
     const tileClassName = ({ date, view }: CalendarTileProperties) => {
         // Add class to tiles in month view only
         if (view === "month") {
             // Check if a date React-Calendar wants to check is on the list of dates to add class to
-            if (markedDays?.find((dDate) => isSameDay(dDate, date))) {
-                return "day marked"
+            if (
+                events?.find((dDate) =>
+                    isSameDay(new Date(dDate.initDate), date)
+                )
+            ) {
+                return "day-marked"
             }
         }
         return "day"
-    }
-
-    const tileContent = ({ date, view }: CalendarTileProperties) => {
-        // Add class to tiles in month view only
-        if (view === "month") {
-            // Check if a date React-Calendar wants to check is on the list of dates to add class to
-            if (markedDays.find((dDate) => isSameDay(dDate, date))) {
-                return null
-            }
-        }
-        return null
     }
 
     return (
@@ -37,7 +32,6 @@ export const Data: FC<CalendarProps> = () => {
             className="events-calendar"
             value={value}
             tileClassName={tileClassName}
-            tileContent={tileContent}
             minDetail="decade"
             showFixedNumberOfWeeks={false}
         />

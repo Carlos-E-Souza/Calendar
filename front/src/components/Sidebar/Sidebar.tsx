@@ -2,44 +2,82 @@ import { FC, useState } from "react"
 import { Event } from "../../pages/Events"
 import { CreateEventModal } from "../Modal/CreateEvent"
 import { UpdateEventModal } from "../Modal/UpdateEvent"
+import { EventService } from "../../services/eventServices"
+import { CalendarPlus, XCircle, PencilLine } from "phosphor-react"
 import "./Sidebar.css"
 
 interface SidebarProps {
     events: Event[] | undefined
 }
 
+const defaultEvent = {
+    _id: "",
+    userId: "",
+    title: "",
+    description: "",
+    initDate: "",
+    endDate: "",
+    initTime: "",
+    endTime: "",
+}
+
+const eventService = new EventService()
+
 export const Sidebar: FC<SidebarProps> = ({ events }) => {
     const [isCreateEventVisible, setIsCreateEventVisible] = useState(false)
     const [isUpdateEventVisible, setIsUpdateEventVisible] = useState(false)
+    const [targetEvent, setTargetEvent] = useState(defaultEvent)
+
+    const handleOpenUpdateEvent = (eventId: string) => {
+        const event =
+            events?.find((event) => event._id === eventId) || defaultEvent
+        setTargetEvent(event)
+        setIsUpdateEventVisible(true)
+    }
+
+    const handleDeleteEvent = (eventId: string) => {
+        const token = localStorage.getItem("token") || ""
+        const res = eventService.deleteEvent(token, eventId)
+        window.location.reload()
+    }
 
     return (
         <div className="sidebar">
             <header className="sidebar-header">
                 <h1 className="sidebar-title">Schedule</h1>
-                <button
+                <CalendarPlus
                     className="add-task-btn"
                     onClick={() => setIsCreateEventVisible(true)}>
                     +
-                </button>
+                </CalendarPlus>
             </header>
 
             <div className="flex flex-col overflow-y-auto">
                 {events?.map((event) => {
                     return (
-                        <button key={event._id} className="sidebar-card">
-                            <span className="text-sm text-muted">
-                                {`${event.initDate} • ${event.endDate}`}
-                            </span>
+                        <button
+                            key={event._id}
+                            id={event._id}
+                            className="sidebar-card">
+                            <header className="flex justify-between items-center w-full">
+                                <span className="text-sm text-gray6">
+                                    {`${event.initDate} • ${event.endDate}`}
+                                </span>
+                                <XCircle
+                                    className="icon"
+                                    onClick={() => handleDeleteEvent(event._id)}
+                                />
+                            </header>
                             <span className="card-title">{event.title}</span>
-                            <span className="text-sm text-muted">{`${event.initTime} • ${event.endTime}`}</span>
-                            {isUpdateEventVisible ? (
-                                <UpdateEventModal
-                                    event={event}
-                                    closeModal={() =>
-                                        setIsUpdateEventVisible(false)
+                            <footer className="flex justify-between items-center w-full">
+                                <span className="text-sm text-gray6">{`${event.initTime} • ${event.endTime}`}</span>
+                                <PencilLine
+                                    className="icon"
+                                    onClick={() =>
+                                        handleOpenUpdateEvent(event._id)
                                     }
                                 />
-                            ) : null}
+                            </footer>
                         </button>
                     )
                 })}
@@ -47,6 +85,12 @@ export const Sidebar: FC<SidebarProps> = ({ events }) => {
             {isCreateEventVisible ? (
                 <CreateEventModal
                     closeModal={() => setIsCreateEventVisible(false)}
+                />
+            ) : null}
+            {isUpdateEventVisible ? (
+                <UpdateEventModal
+                    event={targetEvent}
+                    closeModal={() => setIsUpdateEventVisible(false)}
                 />
             ) : null}
         </div>
