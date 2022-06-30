@@ -85,6 +85,7 @@ export const Sidebar: FC<SidebarProps> = ({ events }) => {
             {isCreateEventVisible ? (
                 <CreateEventModal
                     closeModal={() => setIsCreateEventVisible(false)}
+                    events={events}
                 />
             ) : null}
             {isUpdateEventVisible ? (

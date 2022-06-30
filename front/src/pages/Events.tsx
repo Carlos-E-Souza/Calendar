@@ -19,7 +19,7 @@ export interface Event {
 }
 
 export const Events = () => {
-    const [events, setEvents] = useState<Event[]>()
+    const [events, setEvents] = useState<Event[]>([])
 
     useEffect(() => {
         const fun = async () => {

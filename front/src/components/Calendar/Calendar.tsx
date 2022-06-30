@@ -4,9 +4,10 @@ import { isSameDay } from "../../utils/SameDay"
 import { Event } from "../../pages/Events"
 
 import "./Calendar.css"
+import { addHours } from "date-fns"
 
 interface CalendarProps {
-    events: Event[] | undefined
+    events: Event[]
 }
 
 export const ViewCalendar: FC<CalendarProps> = ({ events }) => {
@@ -18,7 +19,7 @@ export const ViewCalendar: FC<CalendarProps> = ({ events }) => {
             // Check if a date React-Calendar wants to check is on the list of dates to add class to
             if (
                 events?.find((dDate) =>
-                    isSameDay(new Date(dDate.initDate), date)
+                    isSameDay(addHours(new Date(dDate.initDate), 3), date)
                 )
             ) {
                 return "day-marked"

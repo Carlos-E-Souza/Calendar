@@ -12,6 +12,6 @@ export const authUser = async (userData: UserData) => {
             return res.data
         })
         .catch((err) => {
-            return err
+            throw err
         })
 }

@@ -1,5 +1,6 @@
 import { X } from "phosphor-react"
 import { FC, MouseEventHandler, useState } from "react"
+import { Event } from "../../pages/Events"
 import { EventService } from "../../services/eventServices"
 import { Input } from "../Common/Input"
 
@@ -7,6 +8,7 @@ import "./ModalForm.css"
 
 interface CreateEventProps {
     closeModal: MouseEventHandler<HTMLButtonElement | SVGSVGElement>
+    events: Event[] | undefined
 }
 
 export interface FormData {
@@ -20,7 +22,10 @@ export interface FormData {
 
 const eventService = new EventService()
 
-export const CreateEventModal: FC<CreateEventProps> = ({ closeModal }) => {
+export const CreateEventModal: FC<CreateEventProps> = ({
+    closeModal,
+    events,
+}) => {
     const [formData, setFormData] = useState<FormData>({
         title: "",
         description: "",
@@ -39,10 +44,13 @@ export const CreateEventModal: FC<CreateEventProps> = ({ closeModal }) => {
 
     const handleFormSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault()
+
         const token = localStorage.getItem("token") || ""
         const event = await eventService.sendEvent(token, formData)
         window.location.reload()
     }
+
+    const today = new Date()
 
     const inputs = [
         {
@@ -66,6 +74,9 @@ export const CreateEventModal: FC<CreateEventProps> = ({ closeModal }) => {
             name: "initDate",
             value: formData.initDate,
             onChange: handleFormChange,
+            min: `${today.getFullYear()}-0${
+                today.getMonth() + 1
+            }-${today.getDate()}`,
         },
         {
             id: "3",
@@ -82,6 +93,7 @@ export const CreateEventModal: FC<CreateEventProps> = ({ closeModal }) => {
             name: "endDate",
             value: formData.endDate,
             onChange: handleFormChange,
+            min: formData.initDate,
         },
         {
             id: "5",
@@ -90,6 +102,7 @@ export const CreateEventModal: FC<CreateEventProps> = ({ closeModal }) => {
             name: "endTime",
             value: formData.endTime,
             onChange: handleFormChange,
+            min: formData.initTime,
         },
     ]
 

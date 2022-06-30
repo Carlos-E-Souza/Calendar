@@ -24,10 +24,14 @@ export const Login: FC<LoginProps> = (props) => {
     const handleLoginSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault()
 
-        const userToken = await authUser(user)
-        localStorage.setItem("token", userToken)
-
-        navigate("/calendar")
+        await authUser(user)
+            .then((res) => {
+                localStorage.setItem("token", res)
+                navigate("/calendar")
+            })
+            .catch((err) => {
+                window.location.reload()
+            })
     }
 
     const inputs = [
@@ -56,7 +60,7 @@ export const Login: FC<LoginProps> = (props) => {
     ]
 
     return (
-        <div className="form-container w-1/3">
+        <div className="form-container sm:w-1/3">
             <h1 className="form-title">Welcome Back</h1>
             <span className="text-gray6 mb-3 block">
                 Please enter your details

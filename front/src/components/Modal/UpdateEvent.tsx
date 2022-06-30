@@ -123,7 +123,7 @@ export const UpdateEventModal: FC<UpdateEventProps> = ({
                             type="button"
                             className="submit-btn w-1/3 text-black"
                             onClick={handleFormSubmit}>
-                            Add Event
+                            Update Event
                         </button>
                     </div>
                 </div>

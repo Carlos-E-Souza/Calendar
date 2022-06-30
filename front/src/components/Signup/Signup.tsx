@@ -103,7 +103,7 @@ export const Signup: FC<SignupProps> = ({ goToLogin }) => {
             <form className="signup-form">
                 {inputs.map((inp) => {
                     return (
-                        <div key={inp.id} className="w-5/12 mb-4">
+                        <div key={inp.id} className="w-full sm:w-5/12 mb-4">
                             <Input {...inp} />
                         </div>
                     )

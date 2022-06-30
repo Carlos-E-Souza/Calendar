@@ -1,7 +1,8 @@
 .page-container {
-    @apply flex justify-center items-center w-screen h-screen;
+    @apply flex sm:justify-center items-center w-screen h-screen;
 }
 
 .event-container {
-    @apply flex w-3/4 h-3/4 justify-center items-center bg-surface-sec border-2 border-muted rounded-2xl;
+    @apply absolute top-0 flex flex-col w-full justify-center items-center bg-surface-sec border-2
+    sm:flex-row sm:relative sm:top-auto sm:w-3/4 sm:h-3/4 border-muted rounded-2xl;
 }
